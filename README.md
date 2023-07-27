@@ -1,5 +1,5 @@
 
-This is the companion repository with some sample code as used in the video. It has working code for uploading and retrieval of movies. _Why not write the rest?_
+Movie Catalogue API is an application programming interface (API) that provides functionality to manage and retrieve information about movies in a movie catalog. It serves as a backend service that allows developers to interact with the movie database, perform CRUD (Create, Read, Update, Delete) operations, and search for movies based on various criteria.
 
 
 ### Setup
