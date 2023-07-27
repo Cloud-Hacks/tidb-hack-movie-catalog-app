@@ -1,8 +1,8 @@
 IMAGE_NAME ?= "tidb-hack/movie-catalogue:v1"
 .PHONY: run
 run:
-	go build movie-catalogue-api ./..
-	go run movie-catalogue-api
+	go build -o bin/movie-catalogue-api
+	./bin/movie-catalogue-api
 docker-build:
 	docker build -t $(IMAGE_NAME) .
 	docker run -p 8080:8081 $(IMAGE_NAME)

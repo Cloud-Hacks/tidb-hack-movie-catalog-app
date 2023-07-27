@@ -7,7 +7,6 @@ import (
 	"sync"
 
 	"github.com/labstack/echo/v4"
-	"go.opentelemetry.io/otel/attribute"
 	"gorm.io/gorm"
 )
 
@@ -62,10 +61,6 @@ func (s *ServerImplementation) GetMovieByYear(ctx echo.Context, year int64) erro
 		return ctx.JSON(http.StatusBadRequest, tx.Error)
 	}
 
-	// ctxn := context.Background()
-
-	AddSpan(ctx.Request().Context(), "business.sys.database.exec.Get: /movies/year", attribute.String("query Get db", tx.Name()))
-
 	return ctx.JSON(http.StatusOK, movies)
 }
 
@@ -83,8 +78,6 @@ func (s *ServerImplementation) UploadMovie(ctx echo.Context) error {
 	if tx.Error != nil {
 		return tx.Error
 	}
-
-	AddSpan(ctx.Request().Context(), "business.sys.database.exec.POST: /movie", attribute.String("query Upload db", tx.Name()))
 
 	return ctx.JSON(http.StatusOK, "")
 }

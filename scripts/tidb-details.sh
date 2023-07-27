@@ -1,0 +1,2 @@
+export tidbsqlUser=hLnbrpfVNLTaw8b
+export tidbsqlPW=nzXjwvPU5x3q4EjH

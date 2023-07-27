@@ -12,10 +12,6 @@ import (
 	"net/url"
 	"path"
 	"strings"
-	"context"
-	"go.opentelemetry.io/otel/attribute"
-	"go.opentelemetry.io/otel"
-	"go.opentelemetry.io/otel/trace"
 	"github.com/deepmap/oapi-codegen/pkg/runtime"
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/labstack/echo/v4"
@@ -28,19 +24,11 @@ type Error struct {
 
 // Movie defines model for movie.
 type Movie struct {
-	Cast   []string  	`json:"cast" gorm:"type:VARCHAR(100);column:cast"`
-	Genres []string		`json:"genres" gorm:"type:VARCHAR(100);column:genres"`
+	Cast   []string  	`json:"cast" gorm:"type:text;column:cast"`
+	Genres []string		`json:"genres" gorm:"type:text;column:genres"`
 	Title  string   	`json:"title" gorm:"type:text;column:title"`
 	Year   uint32   	`json:"year" gorm:"type:Integer;column:year"`
 }
-
-/* type CastMem struct {
-	Castmem string	`json:"cast" gorm:"type:VARCHAR(26);column:cast"`
-}
-
-type Genr struct {
-	Genrs string `json:"genres" gorm:"type:VARCHAR(26);column:genres"`
-} */
 
 // UploadMovieJSONBody defines parameters for UploadMovie.
 type UploadMovieJSONBody = map[string]interface{}
@@ -75,13 +63,6 @@ type ServerInterfaceWrapper struct {
 // UploadMovie converts echo context to params.
 func (w *ServerInterfaceWrapper) UploadMovie(ctx echo.Context) error {
 	var err error
-	// ctxn := ctx.Request().Context()
-
-	// span := trace.SpanFromContext(ctxn)
-	// defer span.End()
-
-	ctxnw := context.Background()
-	AddSpan(ctxnw, "foundation.web.response.upload", attribute.Int("status", http.StatusAccepted))
 
 	// Invoke the callback with all the unmarshalled arguments
 	err = w.Handler.UploadMovie(ctx)
@@ -275,11 +256,4 @@ func GetSwagger() (swagger *openapi3.T, err error) {
 		return
 	}
 	return
-}
-
-// AddSpan adds a OpenTelemetry span to the trace and context.
-func AddSpan(ctx context.Context, spanName string, keyValues ...attribute.KeyValue) {
-	tracer := otel.Tracer("test-tracer")
-	_, span := tracer.Start(ctx, spanName, trace.WithSpanKind(trace.SpanKindClient), trace.WithAttributes(keyValues...))
-	defer span.End()
 }
