@@ -1,2 +1,2 @@
-export tidbsqlUser=hLnbrpfVNLTaw8b
-export tidbsqlPW=nzXjwvPU5x3q4EjH
+export tidbsqlUser=your_user_name
+export tidbsqlPW=your_user_password
