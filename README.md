@@ -14,7 +14,7 @@ Golang v1.17+, Docker, Kubernetes, Helm Chart
 
 OR
 
-`make docker-run`
+`make docker-start`
 
 ## Post a movie
 

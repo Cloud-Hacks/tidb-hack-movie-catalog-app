@@ -1,9 +1,24 @@
-FROM golang:1.18-alpine as builder
-ADD . /src
+## Build stage
+FROM golang:1.17-alpine AS build
+
 WORKDIR /src
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -a -o movie-catalogue .
+
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
+
+COPY . .
+
+RUN go build -o movie-catalogue .
+
+## Deploy stage
 FROM alpine
-COPY --from=builder /src/movie-catalogue /usr/local/bin/movie-catalogue
+
+COPY --from=build /src/movie-catalogue /usr/local/bin/movie-catalogue
+
 WORKDIR /usr/local/bin
-EXPOSE 8081
-ENTRYPOINT [ "./movie-catalogue" ]
+
+EXPOSE 8080
+
+CMD [ "./movie-catalogue" ]
+

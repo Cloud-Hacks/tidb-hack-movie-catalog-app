@@ -24,10 +24,6 @@ import (
 
 var (
 	port *int
-	// postgresUser     = "app"
-	// postgresPassword *string
-	// postgresHost     *string
-	// postgresPort     = "5432"
 	build = "develop"
 )
 
