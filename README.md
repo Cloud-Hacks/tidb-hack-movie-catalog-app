@@ -1,4 +1,7 @@
 
+![Movie Catalog app](https://github.com/Cloud-Hacks/tidb-hack-movie-catalog-app/assets/11625672/b2ff491f-1dec-4002-919e-96767865e200)
+
+
 Movie Catalogue API is an application programming interface (API) leveraged by TIDB Serverless Cluster that provides functionality to manage and retrieve information about movies in a movie catalog. It serves as a backend service that allows developers to interact with the movie database, perform CRUD (Create, Read, Update, Delete) operations, and search for movies based on various criteria.
 
 
