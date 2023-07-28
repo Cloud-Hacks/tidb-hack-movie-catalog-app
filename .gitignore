@@ -1,2 +1,2 @@
-conf/*
-scripts/tidb-details.sh
+/conf/*
+/scripts/*.sh
