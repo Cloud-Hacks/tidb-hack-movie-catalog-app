@@ -1,2 +1,3 @@
-/conf/*
-/scripts/*.sh
+conf/*
+scripts/tidb-details.sh
+.env
