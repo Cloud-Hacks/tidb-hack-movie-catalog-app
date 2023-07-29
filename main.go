@@ -23,18 +23,23 @@ import (
 )
 
 var (
-	port *int
+	port  *int
 	build = "develop"
+	tidb_db_nm = "movie_catalogue"
 )
 
 func main() {
 	port = flag.Int("port", 8081, "Port for test HTTP server")
 
+	// Retrieve MySQL user and password from environment variables
+	mysqlUser := os.Getenv("TIDB_SQL_USER")
+	mysqlPassword := os.Getenv("TIDB_SQL_PASSWORD")
+
 	msql.RegisterTLSConfig("tidb", &tls.Config{
 		MinVersion: tls.VersionTLS12,
 		ServerName: "gateway01.eu-central-1.prod.aws.tidbcloud.com",
 	})
-	sqlDB, err := sql.Open("mysql", "hLnbrpfVNLTaw8b.root:nzXjwvPU5x3q4EjH@tcp(gateway01.eu-central-1.prod.aws.tidbcloud.com:4000)/movie_catalogue?tls=tidb")
+	sqlDB, err := sql.Open("mysql", mysqlUser+".root:"+mysqlPassword+"@tcp(gateway01.eu-central-1.prod.aws.tidbcloud.com:4000)/" + tidb_db_nm + "?tls=tidb")
 	if err != nil {
 		panic("failed to open database")
 	}
