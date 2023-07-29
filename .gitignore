@@ -1,3 +1,2 @@
 conf/*
-scripts/tidb-details.sh
 .env
