@@ -79,5 +79,5 @@ func (s *ServerImplementation) UploadMovie(ctx echo.Context) error {
 		return tx.Error
 	}
 
-	return ctx.JSON(http.StatusOK, "")
+	return ctx.JSON(http.StatusOK, "Successfully uploaded")
 }
