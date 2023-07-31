@@ -1,2 +1,2 @@
-export tidbsqlUser=your_user_name
-export tidbsqlPW=your_user_password
+export TIDB_SQL_USER=your_user_name
+export TIDB_SQL_PASSWORD=your_user_password
